@@ -17,15 +17,19 @@
                     <form class="mt-4">
                         <div class="form-group">
                             <label class="form-label">Email Address:</label>
-                            <input class="form-control" type="email">
+                            <input class="form-control" type="email" id="email" name="email">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Confirm Email Address:</label>
-                            <input class="form-control" type="email">
+                            <label class="form-label">Password:</label>
+                            <input class="form-control" type="password" id="password" name="password">
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Confirm Password:</label>
+                            <input class="form-control" type="password" id="password" name="password">
+                        </div>
+                        <div class="form-group mt-4 pt-4">
                             <label class="form-label">Security Question:</label>
-                            <select class="form-select">
+                            <select class="form-select" id="security_question" name="security_question">
                                 <option value="13"></option>
                                 <option value="14">Which city did your parents meet?</option>
                                 <option value="">What is the name of your first pet?</option>
@@ -33,11 +37,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Answer:</label>
-                            <input class="form-control" type="password">
+                            <input class="form-control" type="password" id="security_answer" name="security_answer"
+                                maxlength="50" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Confirm Answer:</label>
-                            <input class="form-control" type="password">
+                            <input class="form-control" type="password" id="confirm_security_answer"
+                                name="confirm_security_answer" maxlength="50" required>
                         </div>
                         <div class="form-group text-center"><a class="btn btn-success" role="button"
                                 href="/register_done.html">Continue<i class="fas fa-angle-double-right ms-2"></i></a>
