@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 30);
+            $table->string('title', 30)->nullable();
             $table->string('first_name', 30)->nullable();
             $table->string('last_name', 30)->nullable();
             $table->string('middle_name', 30)->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('marital_status', 30)->nullable();
             $table->string('qualification', 30)->nullable();
             $table->string('security_question', 200)->nullable();
-            $table->string('security_answer', 50)->nullable();
+            $table->string('security_answer', 255)->nullable();
             $table->string('national_identity_number', 11)->nullable();
             $table->string('image', '70')->nullable();
             $table->bigInteger('institution_verified')->nullable();

@@ -14,39 +14,83 @@
                     <p class="mt-4">The following domain <span class="text-danger">(yahoo.com, yahoo.co.uk,
                             ymail.com, rocketmail.com)</span>&nbsp;may encounter delay in mail delivery. You are
                         advised to use other e-mail providers.</p>
-                    <form class="mt-4">
+
+                    @if(Session::has('fail'))
+                    <div class="alert alert-danger mt-4">{{Session::get('fail')}}</div>
+                    @endif
+                    @if(Session::has('success'))
+                    <div class="alert alert-success mt-4">{{Session::get('success')}}</div>
+                    @endif
+
+                    <form method="POST" action="/register" class="mt-4">
+                        @csrf
+
                         <div class="form-group">
                             <label class="form-label">Email Address:</label>
-                            <input class="form-control" type="email" id="email" name="email">
+                            <input class="form-control" type="email" id="email" name="email" value="{{old('email')}}">
+                            @error('email')
+                            <span class="text-danger d-block font-size-14 fw-normal" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Password:</label>
-                            <input class="form-control" type="password" id="password" name="password">
+                            <input class="form-control" type="password" id="password" name="password" required>
+                            @error('password')
+                            <span class="text-danger d-block font-size-14 fw-normal" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Confirm Password:</label>
-                            <input class="form-control" type="password" id="password" name="password">
+                            <input class="form-control" type="password" id="password_confirmation"
+                                name="password_confirmation" required>
+                            @error('password_confirmation')
+                            <span class="text-danger d-block font-size-14 fw-normal" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group mt-4 pt-4">
                             <label class="form-label">Security Question:</label>
-                            <select class="form-select" id="security_question" name="security_question">
-                                <option value="13"></option>
-                                <option value="14">Which city did your parents meet?</option>
-                                <option value="">What is the name of your first pet?</option>
+                            <select class="form-select" id="security_question" name="security_question" required>
+                                <option value=""></option>
+                                <option value="Which city did your parents meet?">Which city did your parents meet?
+                                </option>
+                                <option value="What is the name of your first pet?">What is the name of your first pet?
+                                </option>
                             </select>
+                            @error('security_question')
+                            <span class="text-danger d-block font-size-14 fw-normal" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Answer:</label>
                             <input class="form-control" type="password" id="security_answer" name="security_answer"
                                 maxlength="50" required>
+                            @error('security_answer')
+                            <span class="text-danger d-block font-size-14 fw-normal" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-label">Confirm Answer:</label>
-                            <input class="form-control" type="password" id="confirm_security_answer"
-                                name="confirm_security_answer" maxlength="50" required>
+                            <input class="form-control" type="password" id="security_answer_confirmation"
+                                name="security_answer_confirmation" maxlength="50" required>
+                            @error('security_answer')
+                            <span class="text-danger d-block font-size-14 fw-normal" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        <div class="form-group text-center"><a class="btn btn-success" role="button"
-                                href="/register_done.html">Continue<i class="fas fa-angle-double-right ms-2"></i></a>
+                        <div class="form-group text-center">
+                            <button class="btn btn-success" type="submit">Continue<i
+                                    class="fas fa-angle-double-right ms-2"></i></button>
                         </div>
                         <div class="form-group">
                             <p><a class="blue-link" href="/login">Proceed to login</a>&nbsp;if you have created
@@ -65,4 +109,13 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('script')
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+    $('#security_question').val("{{old('security_question')}}")
+</script>
 @endsection
