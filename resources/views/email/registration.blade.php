@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="head">
-    <img src="{{ env('APP_URL') }}/assets/images/logo-dark.png" alt="{{ env('APP_NAME') }} logo">
+    <img src="{{ env('APP_URL') }}/assets/img/banner1.png" alt="{{ env('APP_NAME') }} logo">
 </div>
 <div class="content">
     <p>Hi,</p>
@@ -14,10 +14,10 @@
 
     <p>
         Welcome to the National Youth Service Corps (NYSC)! We are thrilled to have you on board. To activate your
-        account, kindly click the link below to confirm your email:
+        account, kindly click the link below to confirm your email: {{ date('dmYHis') }}
     </p>
 
-    <p><a href="$verification_link">Confirm Email</a></p>
+    <p><a href="{{ $verification_link }}">Confirm Email</a></p>
 
     <p>By confirming your email, you will unlock access to a world of opportunities and resources that NYSC offers. We
         can't wait to embark on this exciting journey with you!</p>

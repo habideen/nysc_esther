@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PasswordReset;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -30,14 +31,30 @@ class PublicController extends Controller
     } // reg_successful
 
 
-    public function change_password()
+    public function changePassword(Request $request, $email_base64, $token)
     {
-        return view('change_password');
-    } // change_password
+        $is_present = PasswordReset::whereDate('expired_at', '>=', now())
+            ->where('email', base64_decode($email_base64))
+            ->where('token', $token)->count();
+
+        if ($is_present < 1)
+            return redirect('/login')->with('fail', 'The reset password link has expired or does not exist! Please generate a new link.');
+
+        return view('change_password')->with([
+            'email_base64' => $email_base64,
+            'token' => $token
+        ]);
+    } // changePassword
 
 
     public function forgot_password()
     {
         return view('forgot_password');
     } // forgot_password
+
+
+    public function sendVerificationLink()
+    {
+        return view('email_veri_link');
+    } // sendVerificationLink
 }

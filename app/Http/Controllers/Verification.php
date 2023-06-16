@@ -8,7 +8,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class Verification extends Controller
 {
@@ -21,68 +20,38 @@ class Verification extends Controller
 
     public function sendEmailVerification(Request $request)
     {
-        $account = User::select('email', 'fullname')
+        $success_msg = 'We will send a verification email to your e-mail within 10 minutes if this email is '
+            . 'found in our system. Remember to check your spam box too.';
+
+        $account = User::select('email', 'email_verified_at')
             ->where('email', $request->email)->first();
 
         if (!$account) {
-            $msg = 'We will send you a link if email is found';
-
-            if (strtolower($request->segment(1)) == 'api') { //from api call
-                return redirect()->back()->with([
-                    'fail' => $msg
-                ]);
-            } else {
-                return redirect()->back()->with([
-                    'success' => $msg
-                ]);
-            }
-        }
-
-
-        $token = Str::random(30);
-
-        //save verification to db
-        $save = new EmailVerification;
-        $save->user_email = $request->email;
-        $save->code = Hash::make($token);
-        $save->save();
-
-        $verification_link = url('/verify_email/' . $save->id . '/' . $token);
-
-        //send email to user
-        try {
-            Mail::send(
-                'email.registration',
-                [
-                    'verification_link' => $verification_link
-                ],
-                function ($message) use ($request) {
-
-                    $message->to($request->email);
-
-                    $message->subject('Welcome to ' . env('APP_NAME'));
-                }
-            );
-        } catch (Exception $ex) {
-            $send = false;
-        }
-
-        // // runMyScheduler();
-
-
-        $msg = 'Verification link sent';
-
-        if (strtolower($request->segment(1)) == 'api') { //from api call
-            return response([
-                'status' => 'success',
-                'message' => $msg
-            ], 201);
-        } else {
             return redirect()->back()->with([
-                'success' => $msg
+                'success' => $success_msg
             ]);
         }
+
+        if ($account->email_verified_at) {
+            return redirect('/login')->with([
+                'success', 'You have already verified.'
+            ]);
+        }
+
+
+        $send = emailVerifyLink($request->email);
+
+        if (!$send) {
+            return redirect()->back()->with([
+                'fail' => 'A system error occured. Please try again'
+            ]);
+        }
+
+        return redirect()->back()->with([
+            'success' => $success_msg
+        ]);
     } //sendEmailVerification
+
 
 
 

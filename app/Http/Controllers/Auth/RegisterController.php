@@ -32,45 +32,17 @@ class RegisterController extends Controller
         $save->save();
 
 
-        $token = Str::random(30);
-
-        //save verification to db
-        $save_veri = new EmailVerification();
-        $save_veri->user_email = $request->email;
-        $save_veri->code = Hash::make($token);
-        $save_veri->save();
-
-        $verification_link = url('/verify_email/' . $save_veri->id . '/' . $token);
-
-
-        $send = true;
-
-        // try {
-        Mail::send(
-            'email.registration',
-            [
-                'verification_link' => $verification_link
-            ],
-            function ($message) use ($request) {
-
-                $message->to($request->email);
-
-                $message->subject('Welcome to ' . env('APP_NAME'));
-            }
-        );
-        // } catch (Exception $ex) {
-        //     $send = false;
-        // }
+        $send = emailVerifyLink($request->email);
 
 
         if (!$send) {
             return redirect()->back()->with([
-                'fail' => 'Registration was successful. But we could not send you a verification mail'
+                'fail' => 'Registration was successful. But we could not send you a verification mail.'
             ]);
         }
 
         return redirect()->back()->with([
-            'success' => 'Registration was successful. Please check your mail to continue'
+            'success' => 'Registration was successful. Please check your mail to continue.'
         ]);
     } // register
 }
