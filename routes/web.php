@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Student\Reg\NINValidationController;
 use App\Http\Controllers\Verification;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,10 @@ Route::get('/change_password', [PublicController::class, 'change_password']);
 Route::get('/verify_email', [PublicController::class, 'sendVerificationLink']);
 Route::post('/verify_email', [Verification::class, 'sendEmailVerification']);
 Route::get('/verify_email/{verification_id}/{email_code}', [Verification::class, 'verifyEmail']);
+
+
+Route::prefix('student')
+  ->middleware(['auth', 'student'])
+  ->group(function () {
+    Route::get('/reg/step/1', [NINValidationController::class, 'index']);
+  });

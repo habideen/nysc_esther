@@ -45,10 +45,9 @@ class LoginController extends Controller
 
         RateLimiter::clear('auth:' . $request->ip());
 
-        $account_type = strtolower(Auth::user()->account_type);
-        $account_type = str_replace(' ', '', $account_type);
 
-
-        return redirect()->intended('/' . $account_type . '/dashboard');
+        if (Auth::user()->account_type == 'Student' && !Auth::user()->reg_completed) {
+            return redirect()->intended('/' . account_type(Auth::user()->account_type) . '/reg/step/1');
+        }
     } // login
 }

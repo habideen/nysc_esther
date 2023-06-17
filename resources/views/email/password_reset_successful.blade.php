@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="head">
-    <img src="{{ env('APP_URL') }}/assets/img/logo2.png" alt="{{ env('APP_NAME') }} logo">
+    <img src="{{ env('APP_URL') }}/assets/img/banner1.png" alt="{{ env('APP_NAME') }} logo">
 </div>
 <div class="content">
     <p>Hello,</p>

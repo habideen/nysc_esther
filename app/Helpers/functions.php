@@ -47,3 +47,16 @@ if (!function_exists('emailVerifyLink')) {
     return $send;
   }
 } // emailVerifyLink
+
+
+
+
+if (!function_exists('account_type')) {
+  function account_type($account_type)
+  {
+    $account_type = strtolower($account_type);
+    $account_type = str_replace(' ', '', $account_type);
+
+    return $account_type;
+  }
+} // account_type

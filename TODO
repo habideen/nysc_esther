@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `reg_completed` VARCHAR(1) NULL DEFAULT NULL AFTER `account_type`;
