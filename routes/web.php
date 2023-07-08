@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Student\DashboardController;
+use App\Http\Controllers\Student\LGAClearanceController;
+use App\Http\Controllers\Student\PPALetterController;
 use App\Http\Controllers\Student\Reg\InstitutionAttendedController;
 use App\Http\Controllers\Student\Reg\InstitutionController;
 use App\Http\Controllers\Student\Reg\InstitutionValidationController;
@@ -32,16 +36,16 @@ Route::get('/register', [PublicController::class, 'register']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/reg_successful', [PublicController::class, 'reg_successful']);
 
-Route::get('/login', [PublicController::class, 'login']);
+Route::get('/login', [PublicController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('/forgot_password', [PublicController::class, 'forgot_password']);
 Route::post('/reset_password_link', [PasswordController::class, 'resetPasswordLink']);
 
 Route::get('/reset_password/{email_base64}/{token}', [PublicController::class, 'changePassword']);
 Route::post('/reset_password/{email_base64}/{token}', [PasswordController::class, 'changePassword'])->name('password.reset');
-
-Route::get('/change_password', [PublicController::class, 'change_password']);
 
 Route::get('/verify_email', [PublicController::class, 'sendVerificationLink']);
 Route::post('/verify_email', [Verification::class, 'sendEmailVerification']);
@@ -68,4 +72,15 @@ Route::prefix('student/reg/step')
     Route::post('/6', [NextOfKinController::class, 'update']);
     Route::post('/7', [InstitutionAttendedController::class, 'update']);
     Route::post('/8', [MillitaryInfoController::class, 'update']);
+  });
+
+
+Route::prefix('student')
+  ->middleware(['auth', 'student'])
+  ->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/ppa_letter', [PPALetterController::class, 'index']);
+    Route::get('/lga_clearance', [LGAClearanceController::class, 'index']);
+
+    Route::get('/update_password', [PasswordController::class, 'updatePassword']);
   });

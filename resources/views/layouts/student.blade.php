@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>NYSC</title>
+  <title>@yield('title') - NYSC</title>
   <meta name="twitter:description" content="This is twitter description">
   <meta name="twitter:image" content="/assets/img/connect.svg?h=e88df30aad1d2f2dbbde61e65af08b05">
   <meta property="og:description" content="This is open graph description.">
@@ -36,7 +36,12 @@
   @include('components.student_reg_topnav')
   <div class="container mt-5 mb-5">
     <div class="row">
+      @if (Request::segment(2) == 'reg')
       @include('components.student_reg_sidebar')
+      @else
+      @include('components.student_sidebar')
+      @endif
+
       @yield('content')
     </div>
   </div>

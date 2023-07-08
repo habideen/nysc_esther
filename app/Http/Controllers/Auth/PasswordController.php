@@ -117,4 +117,12 @@ class PasswordController extends Controller
         } else
             return redirect('/login')->with('fail', 'Something went wrong');
     } // changePassword
+
+
+
+
+    public function updatePassword()
+    {
+        return view('update_password')->with([]);
+    } // updatePassword
 }

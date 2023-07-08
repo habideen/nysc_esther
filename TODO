@@ -1,1 +1,5 @@
 ALTER TABLE `users` ADD `reg_completed` VARCHAR(1) NULL DEFAULT NULL AFTER `account_type`;
+
+https://dev.to/techtoolindia/import-excel-file-into-laravel-8-3kif
+
+https://docs.laravel-excel.com/3.1/imports/importables.html

@@ -1,10 +1,11 @@
 @extends('layouts.student')
 
+@section('title') Reg: Military Information @endsection
+
 
 @section('content')
 <div class="col-12 col-md-8 col-lg-9">
-    <div id="green_header" class="p-3 mt-5 mt-md-0"><span class="h4 text-dark fw-bold">Military
-            Information</span></div>
+    <div id="green_header" class="p-3 mt-5 mt-md-0"><span class="h4 text-dark fw-bold">Military Information</span></div>
     <form class="mt-4" method="post">
         <div class="row">
             <div class="col-12 col-sm-6">

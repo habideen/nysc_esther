@@ -6,11 +6,21 @@
         class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse border-start" id="navcol-1">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="../">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="../reg_1_nin.html">Continue Reg.</a></li>
-        <li class="nav-item"><a class="nav-link" href="/student/dashboard.html">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Password</a></li>
-        <li class="nav-item"><a class="nav-link text-danger" href="logout.html">Logout</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/student/reg/step/1">Continue Reg.</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/student/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Password</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="/logout">Logout</a>
+        </li>
       </ul>
     </div>
   </div>

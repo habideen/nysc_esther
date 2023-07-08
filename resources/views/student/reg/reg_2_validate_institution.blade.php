@@ -1,5 +1,7 @@
 @extends('layouts.student')
 
+@section('title') Reg: Institution that cleared you for service @endsection
+
 
 @section('content')
 <div class="col-12 col-md-8 col-lg-9">
