@@ -5,7 +5,8 @@
 
 @section('content')
 <div class="col-12 col-md-8 col-lg-9">
-    <div id="green_header" class="p-3 mt-5 mt-md-0"><span class="h4 text-dark fw-bold">Profile Image</span>
+    <div id="green_header" class="p-3 mt-5 mt-md-0"><span class="h4 text-dark fw-bold">Profile Image (Stage 4 of
+            8)</span>
     </div>
     <form class="mt-4" method="post">
         <div class="row">
