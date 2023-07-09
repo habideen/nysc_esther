@@ -12,14 +12,18 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
+        @if (Auth::user()->account_type == 'Student')
         <li class="nav-item">
           <a class="nav-link" href="/student/reg/step/1">Continue Reg.</a>
         </li>
+        @endif
         <li class="nav-item">
-          <a class="nav-link" href="/student/dashboard">Dashboard</a>
+          <a class="nav-link"
+            href="/{{ Auth::user()->account_type == 'Student' ? 'student' : 'admin' }}/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Password</a>
+          <a class="nav-link"
+            href="/{{ Auth::user()->account_type == 'Student' ? 'student' : 'admin' }}/update_password">Password</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-danger" href="/logout">Logout</a>

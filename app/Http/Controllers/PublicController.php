@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PasswordReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicController extends Controller
 {
@@ -21,6 +22,14 @@ class PublicController extends Controller
 
     public function login()
     {
+        if (Auth::user()) {
+            if (Auth::user()->account_type == 'Student' && !Auth::user()->reg_completed) {
+                return redirect()->intended('/' . account_type(Auth::user()->account_type) . '/reg/step/1');
+            } elseif (Auth::user()->account_type == 'Admin' || Auth::user()->account_type == 'Student') {
+                return redirect()->intended('/' . account_type(Auth::user()->account_type) . '/dashboard');
+            }
+        }
+
         return view('login');
     } // login
 

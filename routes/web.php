@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -91,6 +92,7 @@ Route::prefix('admin')
   ->middleware(['auth', 'admin'])
   ->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+    Route::get('/upload_new_students', [StudentsController::class, 'uploadStudentView']);
 
     Route::get('/update_password', [PasswordController::class, 'updatePassword']);
   });
