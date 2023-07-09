@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\LGAClearanceController;
 use App\Http\Controllers\Student\PPALetterController;
 use App\Http\Controllers\Student\Reg\InstitutionAttendedController;
-use App\Http\Controllers\Student\Reg\InstitutionController;
 use App\Http\Controllers\Student\Reg\InstitutionValidationController;
 use App\Http\Controllers\Student\Reg\MillitaryInfoController;
 use App\Http\Controllers\Student\Reg\NextOfKinController;
@@ -81,6 +81,16 @@ Route::prefix('student')
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/ppa_letter', [PPALetterController::class, 'index']);
     Route::get('/lga_clearance', [LGAClearanceController::class, 'index']);
+
+    Route::get('/update_password', [PasswordController::class, 'updatePassword']);
+  });
+
+
+// ADMIN ROUTES
+Route::prefix('admin')
+  ->middleware(['auth', 'admin'])
+  ->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 
     Route::get('/update_password', [PasswordController::class, 'updatePassword']);
   });

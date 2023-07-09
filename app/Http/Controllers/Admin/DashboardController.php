@@ -9,6 +9,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // return 
+        return view('admin.dashboard')->with([
+            'student' => null
+        ]);
     } // index
 }
