@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.panel')
 
 @section('title') Reg: Other Information @endsection
 

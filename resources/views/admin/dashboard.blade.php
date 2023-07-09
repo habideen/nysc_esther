@@ -10,8 +10,7 @@
         <span class="ms-auto d-block mt-1 mt-sm-0">Today's Date: Monday, June 14, 2023</span>
     </div>
     <div id="green_header" class="p-3 pt-2 pb-2 mt-5 mt-md-0">
-        <span class="h6 text-dark fw-bold">Dashboard |
-            Basic Details</span>
+        <span class="h6 text-dark fw-bold">Dashboard | Basic Details</span>
     </div>
     <div class="mt-3 rounded p-3 light-green">
         <div class="mb-2">

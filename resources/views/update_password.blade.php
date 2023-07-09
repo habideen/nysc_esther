@@ -1,5 +1,5 @@
 @if (Request::segment(1) == 'student')
-@extends('layouts.student')
+@extends('layouts.panel')
 @endif
 
 @section('title') Update Password @endsection
