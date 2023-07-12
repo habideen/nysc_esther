@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('last_name', 30);
             $table->string('first_name', 30);
             $table->string('middle_name', 30);
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('uploaded_by');
             $table->timestamps();
         });

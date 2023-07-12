@@ -23,6 +23,8 @@
   </div>
   @include('components.public_footer')
   @include('components.script')
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   @yield('script')
 </body>
 

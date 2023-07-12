@@ -34,6 +34,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('account_type', 30);
             $table->string('reg_completed', 1)->nullable();
+            $table->string('batch', 20)->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\InstitutionController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -93,6 +95,12 @@ Route::prefix('admin')
   ->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index']);
     Route::get('/upload_new_students', [StudentsController::class, 'uploadStudentView']);
+    Route::post('/upload_new_students', [StudentsController::class, 'uploadStudent']);
+    Route::get('/view_institutions', [InstitutionController::class, 'institutionView']);
+    Route::post('/post_institutions', [InstitutionController::class, 'institutionUpdate']);
+
+    Route::get('/update_batch', [BatchController::class, 'batchView']);
+    Route::post('/update_batch', [BatchController::class, 'batchUpdate']);
 
     Route::get('/update_password', [PasswordController::class, 'updatePassword']);
   });

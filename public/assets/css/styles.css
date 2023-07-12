@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: Asul, sans-serif;
 }
 
@@ -6,7 +7,12 @@ body {
   background-color: #f4f4f4;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Inter', sans-serif;
 }
 
@@ -184,7 +190,7 @@ p {
 }
 
 .social a:hover {
-  color: #000!important;
+  color: #000 !important;
 }
 
 .step-active {
@@ -377,7 +383,8 @@ a:hover {
   opacity: 0.95;
 }
 
-#login_wrapper #login_form #form_heading, #green_header {
+#login_wrapper #login_form #form_heading,
+#green_header {
   background-color: #007c0033;
   border-radius: 20px;
 }
@@ -432,3 +439,25 @@ form {
   width: 150px;
 }
 
+/* Start JS Pagination */
+.page-link {
+  color: #18923f;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #134021;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #18923f;
+  border-color: #18923f;
+}
+
+.page-link:focus {
+  box-shadow: 0 0 0 0.25rem #18923f30;
+}
+
+/* Start JS Pagination */

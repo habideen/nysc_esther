@@ -1,9 +1,14 @@
 <?php
 
+use App\Models\Batch;
 use App\Models\EmailVerification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+
+
+
+define('SERVER_ERROR', 'An error occured! Please try again');
 
 
 /**
@@ -60,3 +65,16 @@ if (!function_exists('account_type')) {
     return $account_type;
   }
 } // account_type
+
+
+
+
+if (!function_exists('currentBatch')) {
+  function currentBatch()
+  {
+    $batch = Batch::select('batch')
+      ->latest()->first();
+
+    return $batch ? $batch->batch : null;
+  }
+}

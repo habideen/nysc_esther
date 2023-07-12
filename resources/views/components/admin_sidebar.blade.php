@@ -16,6 +16,10 @@
         Institutions</a>
     </li>
     <li class="mb-3">
+      <a class="{{ Request::segment(2) == 'update_batch' ? 'step-active' : ''}}" href="/admin/update_batch">Update
+        Batch</a>
+    </li>
+    <li class="mb-3">
       <a class="{{ Request::segment(2) == 'update_password' ? 'step-active' : ''}}" href="/admin/update_password">Change
         Password<br></a>
     </li>

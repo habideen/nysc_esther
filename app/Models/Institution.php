@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Institution extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'state',
+        'institution',
+        'created_at',
+        'updated_at'
+    ];
 }
