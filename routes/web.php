@@ -75,6 +75,8 @@ Route::prefix('student/reg/step')
     Route::post('/6', [NextOfKinController::class, 'update']);
     Route::post('/7', [InstitutionAttendedController::class, 'update']);
     Route::post('/8', [MillitaryInfoController::class, 'update']);
+
+    Route::get('/check_nin', [NINValidationController::class, 'getNIN']);
   });
 
 

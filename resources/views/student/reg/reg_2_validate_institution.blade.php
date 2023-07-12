@@ -7,7 +7,10 @@
 <div class="col-12 col-md-8 col-lg-9">
     <div id="green_header" class="p-3 mt-5 mt-md-0"><span class="h4 text-dark fw-bold">Institution that
             cleared you for service (Stage 2 of 8)</span></div>
-    <form class="mt-4" method="post">
+
+    @include('components.alert')
+
+    <form class="mt-4" method="post" accept="{{url('/student/reg/step/1')}}">
         <div class="row">
             <div class="col-12">
                 <div class="form-group"><label class="form-label">Institution<span

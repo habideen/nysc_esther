@@ -2,6 +2,8 @@
 
 use App\Models\Batch;
 use App\Models\EmailVerification;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -77,4 +79,35 @@ if (!function_exists('currentBatch')) {
 
     return $batch ? $batch->batch : null;
   }
-}
+} // currentBatch
+
+
+
+
+if (!function_exists('isRegCompleted')) {
+  function isRegCompleted()
+  {
+    return !Auth::user()->reg_completed ? false : true;
+  }
+} // isRegCompleted
+
+
+
+
+if (!function_exists('isNINValidation')) {
+  function isNINValidation()
+  {
+    $user = User::find(Auth::user()->id);
+
+    if (
+      !$user->national_identity_number
+      || !$user->birthdate
+      || !$user->last_name
+      || !$user->first_name
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+} // isNINValidation

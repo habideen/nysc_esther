@@ -20,6 +20,12 @@ class Student
             return redirect('/login');
         }
 
+        if ($request->segment(2) != 'reg' && $request->segment(2) != 'update_password' && !isRegCompleted()) {
+            return redirect('/student/reg/step/1')->with([
+                'fail' => 'Please complete your registration'
+            ]);
+        }
+
         return $next($request);
     }
 }
