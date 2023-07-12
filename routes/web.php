@@ -85,7 +85,7 @@ Route::prefix('student')
     Route::get('/ppa_letter', [PPALetterController::class, 'index']);
     Route::get('/lga_clearance', [LGAClearanceController::class, 'index']);
 
-    Route::get('/update_password', [PasswordController::class, 'updatePassword']);
+    Route::get('/update_password', [PasswordController::class, 'updatePasswordView']);
   });
 
 
@@ -102,5 +102,12 @@ Route::prefix('admin')
     Route::get('/update_batch', [BatchController::class, 'batchView']);
     Route::post('/update_batch', [BatchController::class, 'batchUpdate']);
 
-    Route::get('/update_password', [PasswordController::class, 'updatePassword']);
+    Route::get('/update_password', [PasswordController::class, 'updatePasswordView']);
+  });
+
+
+// ADMIN ROUTES
+Route::middleware(['auth'])
+  ->group(function () {
+    Route::post('/update_password', [PasswordController::class, 'updatePassword'])->name('update_password');
   });

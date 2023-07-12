@@ -7,6 +7,7 @@ use App\Models\PasswordReset;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -121,8 +122,45 @@ class PasswordController extends Controller
 
 
 
-    public function updatePassword()
+    public function updatePasswordView()
     {
         return view('update_password')->with([]);
-    } // updatePassword
+    } // updatePasswordView
+
+
+
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        if (!(Hash::check($request->get('current_password'), Auth::user()->password))) {
+            return redirect()->back()->with([
+                'isSuccess' => false,
+                'fail' => "Your Current password does not matches with the password you provided. Please try again."
+            ], 200); // Status code 
+        } else {
+            $user = User::find(Auth::user()->id);
+            $user->password = Hash::make($request->get('password'));
+            $user->update();
+            if ($user) {
+                Session::flash('success', 'Password updated successfully!');
+                Session::flash('alert-class', 'alert-success');
+                return redirect()->back()->with([
+                    'isSuccess' => true,
+                    'success' => "Password updated successfully!"
+                ], 200); // Status code here
+            } else {
+                Session::flash('fail', 'Something went wrong!');
+                Session::flash('alert-class', 'alert-danger');
+                return redirect()->back()->with([
+                    'isSuccess' => true,
+                    'fail' => "Something went wrong!"
+                ], 200); // Status code here
+            }
+        }
+    }
 }
