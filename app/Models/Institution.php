@@ -15,6 +15,7 @@ class Institution extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'email',
         'state',
         'institution',
         'created_at',

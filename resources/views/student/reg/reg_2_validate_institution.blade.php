@@ -10,61 +10,95 @@
 
     @include('components.alert')
 
-    <form class="mt-4" method="post" accept="{{url('/student/reg/step/1')}}">
+    <form class="mt-4" method="post" accept="{{url('/student/reg/step/2')}}">
         <div class="row">
             <div class="col-12">
                 <div class="form-group"><label class="form-label">Institution<span
                             class="ms-2 text-danger">*</span></label>
-                    <div><select class="form-select" id="institution_id" name="institution_id" required="">
-                            <option value="undefined">Select Institution</option>
-                        </select></div>
+                    <div>
+                        <select class="form-select" id="institution_id" name="institution_id" required="">
+                            <option value="">Select Institution</option>
+                            @foreach ($institutions as $institution)
+                            <option value="{{$institution->id}}">{{$institution->institution}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-4">
-                <div class="form-group"><label class="form-label">Matric. Number<span
-                            class="ms-2 text-danger">*</span></label>
-                    <div><input class="form-control" type="text" id="matric_no" name="matric_no" required=""></div>
+                <div class="form-group">
+                    <label class="form-label">Matric. Number<span class="ms-2 text-danger">*</span></label>
+                    <div>
+                        <input class="form-control" type="text" id="matric_no" name="matric_no" required="">
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-4">
-                <div class="form-group"><label class="form-label" id="first_name" name="first_name">UTME
+                <div class="form-group">
+                    <label class="form-label" id="first_name" name="first_name">UTME
                         No.<span class="ms-2 text-danger">*</span></label>
-                    <div><input class="form-control" type="text" id="jamb_reg_no" name="jamb_reg_no" required=""></div>
+                    <div>
+                        <input class="form-control" type="text" id="jamb_reg_no" name="jamb_reg_no" required="">
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-4">
-                <div class="form-group"><label class="form-label" id="first_name" name="first_name">Graduation Year<span
-                            class="ms-2 text-danger">*</span></label><select class="form-select" id="graduation_date"
-                        name="graduation_date" required="">
-                        <option value="undefined"></option>
-                    </select></div>
+                <div class="form-group">
+                    <label class="form-label" id="first_name" name="first_name">Graduation Year<span
+                            class="ms-2 text-danger">*</span></label>
+                    <select class="form-select" id="graduation_date" name="graduation_date" required="">
+                        <option value=""></option>
+                        {{-- @php
+                        $date = date('Y')-10;
+                        @endphp
+                        <!-- -->
+                        @for ($i=, $i<=10; $i++) @endfor --}} </select>
+                </div>
             </div>
             <div class="col-12">
-                <div class="form-group mt-5"><button class="btn btn-danger form-control" id="validate_btn" type="submit"
-                        name="validate_btn">Validate Now</button></div>
+                <div class="form-group mt-5">
+                    <button class="btn btn-danger form-control" id="validate_btn" type="submit"
+                        name="validate_btn">Validate Now</button>
+                </div>
             </div>
             <div class="col-12 mt-5">
                 <p class="text-danger mb-3">Not Validated</p>
                 <p class="text-success mb-3">Validated</p>
                 <div>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline">Institution:</span>Obafemi Awolowo
-                        University</p>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline-block">Matriculation
-                            Number:</span>CSC/2017/174</p>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline-block">UTME Registration
-                            Number:</span>77689810JC</p>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline-block">Course of
-                            Study:</span>Computer Science and Engineering</p>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline-block">Graduation
-                            Date:</span>4 July, 2023</p>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline-block">Qualification:</span>BSc</p>
-                    <p class="mb-3"><span class="fw-bold me-3 d-block d-md-inline-block">Fullname:</span>ADEOJO Esther
-                        Fumbi</p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline">Institution:</span>Obafemi Awolowo
+                        University
+                    </p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Matriculation
+                            Number:</span>CSC/2017/174
+                    </p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline-block">UTME Registration
+                            Number:</span>77689810JC
+                    </p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Course of
+                            Study:</span>Computer Science and Engineering
+                    </p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Graduation
+                            Date:</span>4 July, 2023
+                    </p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Qualification:</span>BSc
+                    </p>
+                    <p class="mb-3">
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Fullname:</span>ADEOJO Esther
+                        Fumbi
+                    </p>
                 </div>
             </div>
             <div class="col-12">
-                <div class="form-group"><button class="btn btn-success form-control" type="submit">Save
-                        changes &amp; continue</button></div>
+                <div class="form-group">
+                    <button class="btn btn-success form-control" type="submit" name="save_changes">Save
+                        changes &amp; continue</button>
+                </div>
             </div>
         </div>
     </form>

@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('title') LGA Clearance @endsection
+@section('title') View and Update Institution @endsection
 
 
 @section('content')
@@ -11,11 +11,32 @@
     <div id="green_header" class="p-3 pt-2 pb-2 mt-5 mt-md-0"><span class="h6 text-dark fw-bold">Institutions</span>
     </div>
     <div class="mt-3 rounded p-3 light-green">
+        @include('components.alert')
+
+        <form class="mb-5" method="post" action="/admin/upload_institution" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label">Institution Excel File<span class="ms-2 text-danger">*</span></label>
+                        <input class="form-control" type="file" name="file" id="file" accept=".xls, .xlsx" required>
+                        <span class="text-muted fs-6">File types: xlsx, xls</span>
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <div class="form-group">
+                        <button class="btn btn-success form-control" type="submit">Upload Data</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <div class="table-responsive">
             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                 <thead>
                     <tr>
                         <th>Institution ID</th>
+                        <th>Email</th>
                         <th>State</th>
                         <th>Institution Name</th>
                     </tr>
@@ -24,6 +45,7 @@
                     @foreach ($institutions as $institution)
                     <tr>
                         <td>{{$institution->id}}</td>
+                        <td>{{$institution->email}}</td>
                         <td>{{$institution->state}}</td>
                         <td>{{$institution->institution}}</td>
                     </tr>

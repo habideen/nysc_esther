@@ -99,6 +99,7 @@ Route::prefix('admin')
     Route::get('/upload_new_students', [StudentsController::class, 'uploadStudentView']);
     Route::post('/upload_new_students', [StudentsController::class, 'uploadStudent']);
     Route::get('/view_institutions', [InstitutionController::class, 'institutionView']);
+    Route::post('/upload_institution', [InstitutionController::class, 'uploadInstitution']);
     Route::post('/post_institutions', [InstitutionController::class, 'institutionUpdate']);
 
     Route::get('/update_batch', [BatchController::class, 'batchView']);

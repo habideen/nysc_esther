@@ -46,7 +46,6 @@ class NINValidationController extends Controller
 
     public function update(Request $request)
     {
-        // return strlen($request->national_identity_number);
         $request->validate([
             'national_identity_number' => ['required', 'integer', 'regex:/^([0-9]){11,11}$/'],
             'birthdate' => ['required', 'date', 'date_format:Y-m-d', 'before:' . date('Y-m-d', strtotime('-12 years'))],
