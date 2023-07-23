@@ -34,7 +34,8 @@ class InstitutionsImport extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinde
                 ],
                 [
                     'state' => ucwords(trim($row['state'])),
-                    'institution' => trim($row['name'])
+                    'institution' => trim($row['name']),
+                    'email_verified_at' => now()
                 ]
             );
         } else {

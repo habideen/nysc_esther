@@ -12,6 +12,8 @@
     <div class="row">
       @if (Request::segment(1) == 'admin')
       @include('components.admin_sidebar')
+      @elseif (Request::segment(1) == 'institution')
+      @include('components.institution_reg_sidebar')
       @elseif (Request::segment(2) == 'reg')
       @include('components.student_reg_sidebar')
       @else

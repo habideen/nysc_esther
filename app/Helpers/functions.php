@@ -111,3 +111,15 @@ if (!function_exists('isNINValidation')) {
     }
   }
 } // isNINValidation
+
+
+
+
+if (!function_exists('getYear')) {
+  function getYear($date)
+  {
+    $date = date('Y-m-d', strtotime($date));
+
+    return explode('-', $date)[0] ?? false;
+  }
+} //getYear

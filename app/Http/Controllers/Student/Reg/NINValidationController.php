@@ -69,6 +69,8 @@ class NINValidationController extends Controller
             ]);
         }
 
+        Auth::setUser($save);
+
         return redirect('/student/reg/step/2')->with([
             'success' => 'NIN validation was successful'
         ]);

@@ -11,6 +11,7 @@
     @include('components.alert')
 
     <form class="mt-4" method="post" accept="{{url('/student/reg/step/2')}}">
+        @csrf
         <div class="row">
             <div class="col-12">
                 <div class="form-group"><label class="form-label">Institution<span
@@ -29,7 +30,8 @@
                 <div class="form-group">
                     <label class="form-label">Matric. Number<span class="ms-2 text-danger">*</span></label>
                     <div>
-                        <input class="form-control" type="text" id="matric_no" name="matric_no" required="">
+                        <input class="form-control" type="text" id="matric_no" name="matric_no"
+                            value="{{old('matric_no') ?? $userInfo->matric_no ?? ''}}" required="">
                     </div>
                 </div>
             </div>
@@ -38,7 +40,8 @@
                     <label class="form-label" id="first_name" name="first_name">UTME
                         No.<span class="ms-2 text-danger">*</span></label>
                     <div>
-                        <input class="form-control" type="text" id="jamb_reg_no" name="jamb_reg_no" required="">
+                        <input class="form-control" type="text" id="jamb_reg_no" name="jamb_reg_no"
+                            value="{{old('jamb_reg_no') ?? $userInfo->jamb_reg_no ?? ''}}" required="">
                     </div>
                 </div>
             </div>
@@ -48,11 +51,10 @@
                             class="ms-2 text-danger">*</span></label>
                     <select class="form-select" id="graduation_date" name="graduation_date" required="">
                         <option value=""></option>
-                        {{-- @php
-                        $date = date('Y')-10;
-                        @endphp
+                        @php $date = date('Y')-10; @endphp
                         <!-- -->
-                        @for ($i=, $i<=10; $i++) @endfor --}} </select>
+                        @for($i=0; $i<=10; $i++) <option value="{{$date}}">{{$date++}}</option> @endfor
+                    </select>
                 </div>
             </div>
             <div class="col-12">
@@ -61,36 +63,43 @@
                         name="validate_btn">Validate Now</button>
                 </div>
             </div>
+
+            @if (isset($userInfo))
             <div class="col-12 mt-5">
-                <p class="text-danger mb-3">Not Validated</p>
+                @if ($userInfo->user_id)
                 <p class="text-success mb-3">Validated</p>
+                @else
+                <p class="text-danger mb-3">Not Validated</p>
+                @endif
+
                 <div>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline">Institution:</span>Obafemi Awolowo
-                        University
+                        <span class="fw-bold me-3 d-block d-md-inline">Institution:</span>
+                        {{$userInfo->institution}}
                     </p>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline-block">Matriculation
-                            Number:</span>CSC/2017/174
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Matriculation Number:</span>
+                        {{$userInfo->matric_no}}
                     </p>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline-block">UTME Registration
-                            Number:</span>77689810JC
+                        <span class="fw-bold me-3 d-block d-md-inline-block">UTME Registration Number:</span>
+                        {{$userInfo->jamb_reg_no}}
                     </p>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline-block">Course of
-                            Study:</span>Computer Science and Engineering
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Course of Study:</span>
+                        {{$userInfo->course_of_study}}
                     </p>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline-block">Graduation
-                            Date:</span>4 July, 2023
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Graduation Date:</span>
+                        {{date('M d, Y', strtotime($userInfo->graduation_date))}}
                     </p>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline-block">Qualification:</span>BSc
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Qualification:</span>
+                        {{$userInfo->qualification}}
                     </p>
                     <p class="mb-3">
-                        <span class="fw-bold me-3 d-block d-md-inline-block">Fullname:</span>ADEOJO Esther
-                        Fumbi
+                        <span class="fw-bold me-3 d-block d-md-inline-block">Fullname:</span>
+                        {{strtoupper($userInfo->last_name)}} {{$userInfo->first_name}} {{$userInfo->middle_name}}
                     </p>
                 </div>
             </div>
@@ -100,7 +109,17 @@
                         changes &amp; continue</button>
                 </div>
             </div>
+            @endif
         </div>
     </form>
 </div>
+@endsection
+
+
+
+@section('script')
+<script>
+    $('#institution_id').val('{{old('institution_id') ?? $userInfo->institution_id ?? ''}}')
+    $('#graduation_date').val('{{old('graduation_date') ?? getYear($userInfo->graduation_date ?? null) ?? ''}}')
+</script>
 @endsection

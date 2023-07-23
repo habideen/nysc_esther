@@ -3,11 +3,12 @@
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\InstitutionController;
-use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Institution\DashboardController as InstitutionDashboardController;
+use App\Http\Controllers\Institution\StudentsController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\LGAClearanceController;
@@ -68,7 +69,7 @@ Route::prefix('student/reg/step')
     Route::get('/8', [MillitaryInfoController::class, 'index']);
 
     Route::post('/1', [NINValidationController::class, 'update']);
-    Route::post('/2', [InstitutionValidationController::class, 'update']);
+    Route::post('/2', [InstitutionValidationController::class, 'index']);
     Route::post('/3', [UserInfoController::class, 'update']);
     Route::post('/4', [ProfileImageController::class, 'update']);
     Route::post('/5', [OtherInfoController::class, 'update']);
@@ -96,8 +97,8 @@ Route::prefix('admin')
   ->middleware(['auth', 'admin'])
   ->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index']);
-    Route::get('/upload_new_students', [StudentsController::class, 'uploadStudentView']);
-    Route::post('/upload_new_students', [StudentsController::class, 'uploadStudent']);
+    // Route::get('/upload_new_students', [StudentsController::class, 'uploadStudentView']);
+    // Route::post('/upload_new_students', [StudentsController::class, 'uploadStudent']);
     Route::get('/view_institutions', [InstitutionController::class, 'institutionView']);
     Route::post('/upload_institution', [InstitutionController::class, 'uploadInstitution']);
     Route::post('/post_institutions', [InstitutionController::class, 'institutionUpdate']);
@@ -106,6 +107,17 @@ Route::prefix('admin')
     Route::post('/update_batch', [BatchController::class, 'batchUpdate']);
 
     Route::get('/update_password', [PasswordController::class, 'updatePasswordView']);
+  });
+
+
+// ADMIN ROUTES
+Route::prefix('institution')
+  ->middleware(['auth', 'institution'])
+  ->group(function () {
+    Route::get('/dashboard', [InstitutionDashboardController::class, 'index']);
+    Route::get('/upload_new_students', [StudentsController::class, 'uploadStudentView']);
+    Route::post('/upload_new_students', [StudentsController::class, 'uploadStudent']);
+    Route::get('/view_students', [StudentsController::class, 'viewStudent']);
   });
 
 
