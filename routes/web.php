@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Institution\DashboardController as InstitutionDashboardController;
 use App\Http\Controllers\Institution\StudentsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\LGAClearanceController;
@@ -125,4 +126,5 @@ Route::prefix('institution')
 Route::middleware(['auth'])
   ->group(function () {
     Route::post('/update_password', [PasswordController::class, 'updatePassword'])->name('update_password');
+    Route::post('/updateAvatar', [ProfileController::class, 'updateAvatar'])->name('updateAvatar');
   });
