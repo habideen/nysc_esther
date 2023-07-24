@@ -12,6 +12,10 @@ class InstitutionValidationController extends Controller
 {
     private function getUserInfoFromInstitution()
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         return $userInfo = CanditeInfoFromSchool::select(
             'candite_info_from_schools.id',
             'candite_info_from_schools.jamb_reg_no',
@@ -33,6 +37,10 @@ class InstitutionValidationController extends Controller
 
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         if (!isNINValidation()) {
             return redirect('/student/reg/step/1')->with([
                 'fail' => 'Complete your NIN validation'

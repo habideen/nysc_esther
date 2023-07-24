@@ -11,6 +11,10 @@ class InstitutionAttendedController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         return view('student/reg/reg_7_institution_attended')->with([
             'institution' => InstitutionAttended::where('user_id', Auth::user()->id)->first()
         ]);
@@ -20,6 +24,10 @@ class InstitutionAttendedController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $request->validate([
             'primary_institution_1' => ['required'],
             'primary_from_year_1' => ['required', 'integer', 'min:1970', 'max:' . date('Y')],

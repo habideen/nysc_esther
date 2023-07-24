@@ -14,6 +14,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\LGAClearanceController;
 use App\Http\Controllers\Student\PPALetterController;
+use App\Http\Controllers\Student\Reg\CompleteController;
 use App\Http\Controllers\Student\Reg\InstitutionAttendedController;
 use App\Http\Controllers\Student\Reg\InstitutionValidationController;
 use App\Http\Controllers\Student\Reg\MillitaryInfoController;
@@ -68,6 +69,7 @@ Route::prefix('student/reg/step')
     Route::get('/6', [NextOfKinController::class, 'index']);
     Route::get('/7', [InstitutionAttendedController::class, 'index']);
     Route::get('/8', [MillitaryInfoController::class, 'index']);
+    Route::get('/9', [CompleteController::class, 'index']);
 
     Route::post('/1', [NINValidationController::class, 'update']);
     Route::post('/2', [InstitutionValidationController::class, 'index']);
@@ -77,6 +79,7 @@ Route::prefix('student/reg/step')
     Route::post('/6', [NextOfKinController::class, 'update']);
     Route::post('/7', [InstitutionAttendedController::class, 'update']);
     Route::post('/8', [MillitaryInfoController::class, 'update']);
+    Route::post('/9', [CompleteController::class, 'update']);
 
     Route::get('/check_nin', [NINValidationController::class, 'getNIN']);
   });

@@ -15,6 +15,10 @@ class NextOfKinController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $states = States::all();
         $local_governments = LocalGovernments::all();
 
@@ -31,6 +35,10 @@ class NextOfKinController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $request->validate([
             'name_1' => ['required', 'min:2', 'max:90', 'regex:/^([A-Za-z \-])+$/'],
             'relationship_1' => ['required'],

@@ -13,6 +13,10 @@ class MillitaryInfoController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         return view('student/reg/reg_8_military_info')->with([
             'millitary' => MillitaryInfo::where('user_id', Auth::user()->id)->first()
         ]);
@@ -23,6 +27,10 @@ class MillitaryInfoController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $request->validate([
             'naf_na_navy' => ['required', Rule::in(['Yes', 'No'])],
             'nia' => ['required', Rule::in(['Yes', 'No'])],
@@ -45,12 +53,7 @@ class MillitaryInfoController extends Controller
             ]);
         }
 
-        User::where('id', Auth::user()->id)
-            ->update(['reg_completed' => '1']);
-
-        Auth::setUser(User::find(Auth::user()->id));
-
-        return redirect('/student/dashboard')->with([
+        return redirect('/student/reg/step/9')->with([
             'success' => 'Millitary information update successfully'
         ]);
     } //update

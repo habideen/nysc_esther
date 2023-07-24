@@ -11,6 +11,10 @@ class NINValidationController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $user = User::select(
             'national_identity_number',
             'birthdate',
@@ -46,6 +50,10 @@ class NINValidationController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $request->validate([
             'national_identity_number' => ['required', 'integer', 'regex:/^([0-9]){11,11}$/'],
             'birthdate' => ['required', 'date', 'date_format:Y-m-d', 'before:' . date('Y-m-d', strtotime('-12 years'))],

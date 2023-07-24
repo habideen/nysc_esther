@@ -32,5 +32,9 @@
       <a class="{{ Request::segment(4) == '8' ? 'step-active' : ''}}" href="/student/reg/step/8">Military
         Information</a>
     </li>
+    <li class="mb-3">
+      <a class="{{ Request::segment(4) == '9' ? 'step-active' : ''}}" href="/student/reg/step/9">Complete
+        Registration</a>
+    </li>
   </ul>
 </div>

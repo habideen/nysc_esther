@@ -12,9 +12,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
-        @if (Auth::user()->account_type == 'Student')
+        @if (Auth::user()->account_type == 'Student' && !Auth::user()->reg_completed)
         <li class="nav-item">
-          <a class="nav-link" href="/student/reg/step/1">Continue Reg.</a>
+          <a class="nav-link" href="/student/reg/step/1">{{Auth::user()->reg_completed ? 'View' :'Continue' }} Reg.</a>
         </li>
         @endif
         <li class="nav-item">

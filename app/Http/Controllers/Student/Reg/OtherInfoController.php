@@ -16,6 +16,10 @@ class OtherInfoController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $states = States::all();
         $local_governments = LocalGovernments::all();
 
@@ -31,6 +35,10 @@ class OtherInfoController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         Session::flash('fail', 'Invalid inputs');
         $request->validate([
             'present_state_id' => ['required', 'integer', 'exists:states,id'],

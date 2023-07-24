@@ -12,6 +12,10 @@ class UserInfoController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         return view('student/reg/reg_3_user_information')->with([
             'saved' => null
         ]);
@@ -22,6 +26,14 @@ class UserInfoController extends Controller
 
     public function update(Request $request)
     {
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
+        if (Auth::user()->reg_completed) {
+            return redirect()->back();
+        }
+
         $request->validate([
             'title' => ['required', Rule::in(['Mr', 'Miss', 'Mr'])],
             'last_name' => ['required', 'string', 'min:2', 'max:30', 'regex:/^([A-Za-z])+$/'],
