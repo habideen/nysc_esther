@@ -5,6 +5,8 @@
 
 @section('content')
 <div class="col-12 col-md-8 col-lg-9">
+    @include('components.alert')
+
     <div class="d-sm-flex font-size-12 mb-2">
         <span class="d-inline-block rounded p-1 bg-success text-white">mariam@gmail.com</span>
         <span class="ms-auto d-block mt-1 mt-sm-0">Today's Date: Monday, June 14, 2023</span>

@@ -5,7 +5,7 @@
       <a class="{{ Request::segment(2) == 'dashboard' ? 'step-active' : ''}}" href="/admin/dashboard">My
         Dashboard</a>&nbsp;
     </li>
-    <li class="mb-3">
+    <li class="mb-3 d-none">
       <a class="{{ Request::segment(2) == 'upload_new_students' ? 'step-active' : ''}}"
         href="/admin/upload_new_students">Upload
         New Student</a>
